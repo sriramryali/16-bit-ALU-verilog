@@ -1,7 +1,7 @@
 // Implementation of a parameterized 16-bit ALU
 // This ALU supports arithmetic, logical, shift, rotate and comparision operations
 
-`timescale 10ns/1ps
+`timescale 1ns/1ps
 module alu #(
     parameter WIDTH = 16        // declaring a parameter for the width of bits, can be simply changed if needed
     )(
