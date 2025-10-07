@@ -1,7 +1,6 @@
 # ALU module documentation
 
 ## Module description
-## Module description
 A parameterized 16-bit Arithmetic Logic Unit (ALU) that supports 24 operations including arithmetic, logical, shift, rotate, comparison, increment/decrement, and pass-through operations.
 
 ## Parameters
