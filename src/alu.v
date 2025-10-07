@@ -51,7 +51,7 @@ module alu #(
             5'b01110 : result = a >> b[3:0];              // SRL  -> shift right logical 
             5'b01111 : result = $signed(a) >>> b[3:0];    // SRA  -> shift right arithmetic : sign bit is preserved
             
-            // COMPARISION OPERATIONS
+            // COMPARISON OPERATIONS
             5'b10000 : result = ($signed(a) < $signed(b)) ? WIDTH'd1 : WIDTH'd0;   // SLT  -> set less than
             5'b10001 : result = (a < b) ? WIDTH'd1 : WIDTH'd0;                     // SLTU  -> set less than unsigned
             
