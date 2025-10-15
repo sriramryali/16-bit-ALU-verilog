@@ -56,8 +56,8 @@ module alu #(
             5'b10001 : result = (a < b) ? WIDTH'd1 : WIDTH'd0;                     // SLTU  -> set less than unsigned
             
             // INCREMENT/DECREMENT OPERATIONS
-            5'b10010 : result = a + 1;          // INC
-            5'b10011 : result = a - 1;          // DEC
+            5'b10010 : {carry_out, result} = a + 1;          // INC
+            5'b10011 : {carry_out, result} = a - 1;          // DEC
             
             // ROTATE OPERATIONS
             5'b10100 : result = {a[WIDTH-2 : 0], a[WIDTH-1]};    // ROT L  -> gets rotated by a single bit
