@@ -35,3 +35,24 @@ A parameterized 16-bit Arithmetic Logic Unit (ALU) that supports 24 operations i
 -> shifts use b[3:0] : 0 - 15
 -> as of now, rotate operates by 1-bit
 -> see source code comments for detailed operation descriptions
+
+# ALU testbench documentation
+
+## Testbench description
+This testbench is automated(hence manual checking isn't needed) and has around 40 testcases to test 28 operations
+
+## Features
+-> It is self checking(uses a task "check_result" to do so) -> PASS/FAIL verification
+-> covers all operations mentioned in the ALU
+-> verifies status flags 
+-> includes edge cases too: overflow, division by 0
+
+## Key testcases
+-> carry detection: ADD with overflow (0xFFFF + 1)
+-> overflow detection: ADD signed overflow (0x7FFF + 1)
+-> borrow detection: SUB with underflow (0x30 - 0x40)
+-> division by zero: Returns 0 with zero flag set
+-> wraparound**: INC/DEC at boundaries (0xFFFF + 1, 0x0000 - 1)
+-> sign extension: SRA preserves sign bit
+
+

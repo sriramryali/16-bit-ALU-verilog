@@ -170,14 +170,14 @@ module alu_tb;
         a = 16'h0005; b = 16'h0000; opcode = 5'b10010;      // INC
         check_result(16'h0006, 1'b0, 1'b0, 1'b0, "INC");
         
-        a = 16'hFFFF; b = 16'h0000; opcode = 5'b10010;      // INC with carry out
+        a = 16'hFFFF; b = 16'h0000; opcode = 5'b10010;      // INC with carry out -> wrap around condition
         check_result(16'h0000, 1'b1, 1'b1, 1'b0, "INC");
         
         // DEC
         a = 16'h0005; b = 16'h0000; opcode = 5'b10011;      // DEC
         check_result(16'h0004, 1'b0, 1'b0, 1'b0, "DEC");
         
-        a = 16'h0000; b = 16'h0000; opcode = 5'b10011;      // DEC with borrow (it is reflected as carry_out)
+        a = 16'h0000; b = 16'h0000; opcode = 5'b10011;      // DEC with borrow (it is reflected as carry_out) -> wrap around condition
         check_result(16'hFFFF, 1'b0, 1'b1, 1'b0, "DEC");
 
         // Rotate operations
