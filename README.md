@@ -42,10 +42,10 @@ A parameterized 16-bit Arithmetic Logic Unit (ALU) that supports 24 operations i
 This testbench is automated(hence manual checking isn't needed) and has around 40 testcases to test 28 operations
 
 ## Features
--> It is self checking(uses a task "check_result" to do so) -> PASS/FAIL verification
--> covers all operations mentioned in the ALU
--> verifies status flags 
--> includes edge cases too: overflow, division by 0
+- It is self checking(uses a task "check_result" to do so) -> PASS/FAIL verification
+- covers all operations mentioned in the ALU
+- verifies status flags 
+- includes edge cases too: overflow, division by 0
 
 ## Key testcases
 -> carry detection: ADD with overflow (0xFFFF + 1)
