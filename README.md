@@ -42,7 +42,7 @@ There are a total of 24 operations in this ALU including arithmetic, logical, sh
 This testbench is automated(hence manual checking isn't needed) and has around 40 testcases to test 28 operations
 
 ## Features
-- It is self checking(uses a task "check_result" to do so) -> PASS/FAIL verification
+- it is self checking(uses a task "check_result" to do so) -> PASS/FAIL verification
 - covers all operations mentioned in the ALU
 - verifies status flags 
 - includes edge cases too: overflow, division by 0
