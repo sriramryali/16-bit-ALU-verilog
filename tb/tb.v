@@ -1,4 +1,4 @@
-// testbench for our 16-bit parametrized ALU
+// testbench for our 16-bit parameterized ALU
 // As the number of operations are more, we use a task for automating the process (task is simply like a function which can be use multiple times)
 
 `timescale 1ns/1ps
