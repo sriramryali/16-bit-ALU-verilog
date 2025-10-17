@@ -36,17 +36,15 @@ module alu_tb;
             #1;         // delay for letting signals settle
             
             if((result === expected_result) && (zero === expected_zero) && (carry_out === expected_carry_out) && (overflow === expected_overflow)) begin    // checking if the expected and the values we got are same
-                $display(" PASS   :  %s", operation_name);
-                $display("        a = %h, b = %h, opcode = %b", a, b, opcode);
-                $display("        result = %h, zero = %b, carry = %b, overflow = %b", result, zero, carry_out, overflow);
+                $display(" PASS | %-8s | a=%h  b=%h  op=%b | result=%h  Z=%b  C=%b  O=%b", operation_name, a, b, opcode, result, zero, carry_out, overflow);
                 passed++;
             end
 
             else begin                                         // if the values are different
-                $display(" FAIL   :  %s", operation_name);
-                $display("        a = %h, b = %h, opcode = %b", a, b, opcode);
-                $display("        Expected: result = %h, zero = %b, carry = %b, overflow = %b", expected_result, expected_zero, expected_carry_out, expected_overflow);
-                $display("        Got: result = %h, zero = %b, carry = %b, overflow = %b", result, zero, carry_out, overflow);
+                $display(" FAIL |  %-8s", operation_name);
+                $display("  Inputs:   a = %h, b = %h, opcode = %b", a, b, opcode);
+                $display("  Expected: result = %h, zero = %b, carry = %b, overflow = %b", expected_result, expected_zero, expected_carry_out, expected_overflow);
+                $display("  Got :     result = %h, zero = %b, carry = %b, overflow = %b", result, zero, carry_out, overflow);
                 failed++;
             end
         end
@@ -99,8 +97,8 @@ module alu_tb;
         check_result(16'h0000, 1'b1, 1'b0, 1'b0, "DIV");
         
         // MOD 
-        a = 16'h0065; b = 16'h000A; opcode = 5'b00100;
-        check_result(16'h0005, 1'b0, 1'b0, 1'b0, "MOD");
+        a = 16'h0065; b = 16'h000A; opcode = 5'b00100;      // calculates the remainder after division
+        check_result(16'h0001, 1'b0, 1'b0, 1'b0, "MOD");
         
         a = 16'h0064; b = 16'h0000; opcode = 5'b00100;
         check_result(16'h0000, 1'b1, 1'b0, 1'b0, "MOD");
@@ -204,8 +202,8 @@ module alu_tb;
         // Summary
 
         #10;
-        $display(" Passed cases  : %d", passed);
-        $display(" Failed cases  : %d", failed);
+        $display(" Passed cases : %d", passed);
+        $display(" Failed cases : %d", failed);
 
         if (failed == 0)
             $display(" All testcases passed ");

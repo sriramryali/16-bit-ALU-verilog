@@ -33,7 +33,7 @@ module alu #(
             end
 
             5'b00010 : result = a * b;                            // MUL  ->  here, only the lower 16 bits are stored, rest are truncated (as multiplication of two 16-bit numbers results in a 32-bit number )
-            5'b00011 : result = (b != 0) ? (a / b) : WIDTH'd0;    // QUOTIENT
+            5'b00011 : result = (b != 0) ? (a / b) : WIDTH'd0;    // QUOTIENT    Note : WIDTH'd0 shows an error for icarus, so use {WIDTH{1'b0}} for iverilog simulator
             5'b00100 : result = (b != 0) ? (a % b) : WIDTH'd0;    // REMAINDER
             
             // LOGICAL OPERATIONS
