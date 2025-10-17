@@ -53,6 +53,8 @@ module alu_tb;
     // Testbench starts
     
     initial begin
+        $dumpfile("alu_wave.vcd");   // these are for viewing the waveforms
+        $dumpvars(0, alu_tb);        // dump all the signals in tb + submodules
 
         // Arithmetic operations
         
