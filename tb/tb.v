@@ -54,7 +54,7 @@ module alu_tb;
     
     initial begin
         $dumpfile("alu_wave.vcd");   // these are for viewing the waveforms
-        $dumpvars(0, alu_tb);        // dump all the signals in tb + submodules
+        $dumpvars(0, alu_tb);        // dump all the signals of tb and submodules
 
         // Arithmetic operations
         
