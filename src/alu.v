@@ -33,8 +33,8 @@ module alu #(
             end
 
             5'b00010 : result = a * b;                            // MUL  ->  here, only the lower 16 bits are stored, rest are truncated (as multiplication of two 16-bit numbers results in a 32-bit number )
-            5'b00011 : result = (b != 0) ? (a / b) : WIDTH'd0;    // QUOTIENT    Note : WIDTH'd0 shows an error for icarus, so use {WIDTH{1'b0}} for iverilog simulator
-            5'b00100 : result = (b != 0) ? (a % b) : WIDTH'd0;    // REMAINDER
+            5'b00011 : result = (b != 0) ? (a / b) : {WIDTH{1'b0}};    // QUOTIENT    Note : WIDTH'd0 is not allowed, size must be a number, parameter is allowed in range : [WIDTH - 1 : 0], also allowed inside if : if (WIDTH > 4)
+            5'b00100 : result = (b != 0) ? (a % b) : {WIDTH{1'b0}};    // REMAINDER
             
             // LOGICAL OPERATIONS
             5'b00101 : result = a & b;          // AND
@@ -52,8 +52,8 @@ module alu #(
             5'b01111 : result = $signed(a) >>> b[3:0];    // SRA  -> shift right arithmetic : sign bit is preserved
             
             // COMPARISON OPERATIONS
-            5'b10000 : result = ($signed(a) < $signed(b)) ? WIDTH'd1 : WIDTH'd0;   // SLT  -> set less than
-            5'b10001 : result = (a < b) ? WIDTH'd1 : WIDTH'd0;                     // SLTU  -> set less than unsigned
+            5'b10000 : result = ($signed(a) < $signed(b)) ? {WIDTH{1'b0}} : {WIDTH{1'b0}};   // SLT  -> set less than
+            5'b10001 : result = (a < b) ? {WIDTH{1'b0}} : {WIDTH{1'b0}};                     // SLTU  -> set less than unsigned
             
             // INCREMENT/DECREMENT OPERATIONS
             5'b10010 : {carry_out, result} = a + 1;          // INC
@@ -66,10 +66,10 @@ module alu #(
             // PASS OPERATIONS
             5'b10110 : result = a;              // PASS a
             5'b10111 : result = b;              // PASS b
-            default : result = WIDTH'd0;
+            default : result = {WIDTH{1'b0}};
         endcase
 
-        zero = (result == WIDTH'd0);     // detects if the output is zero
+        zero = (result == {WIDTH{1'b0}});     // detects if the output is zero
     end
 
 endmodule
