@@ -37,7 +37,6 @@ There are a total of 24 operations in this ALU including arithmetic, logical, sh
 - shifts use b[3:0] : 0 - 15
 - as of now, rotate operates by 1-bit
 - see source code comments for detailed operation descriptions
-- WIDTH'd0 (parameterized literal width) isn't supported by icarus, so use {WIDTH{1'b0}} in that case
 
 # ALU testbench documentation
 
