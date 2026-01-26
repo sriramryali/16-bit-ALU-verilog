@@ -53,7 +53,7 @@ module alu #(
             
             // COMPARISON OPERATIONS
             5'b10000 : result = ($signed(a) < $signed(b)) ? {WIDTH{1'b0}} : {WIDTH{1'b0}};   // SLT  -> set less than
-            5'b10001 : result = (a < b) ? {WIDTH{1'b0}} : {WIDTH{1'b0}};                     // SLTU  -> set less than unsigned
+            5'b10001 : result = (a < b) ? {WIDTH{1'b1}} : {WIDTH{1'b0}};                     // SLTU  -> set less than unsigned
             
             // INCREMENT/DECREMENT OPERATIONS
             5'b10010 : {carry_out, result} = a + 1;          // INC
