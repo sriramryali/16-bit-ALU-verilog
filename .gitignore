@@ -1,0 +1,38 @@
+# Simulation outputs
+*.vcd
+*.fst
+*.ghw
+*.out
+*.exe
+*.vvp
+*.log
+a.out
+
+# Simulation directory
+sim/*.vcd
+sim/*.out
+sim/*.log
+
+# Waveform viewer files
+*.gtkw
+*.sav
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor files
+*.sublime-workspace
+*.sublime-project
+*.swp
+*~
+
+# Windows files
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
