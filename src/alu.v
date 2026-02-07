@@ -34,7 +34,7 @@ module alu #(
 
             5'b00010 : result = a * b;                            // MUL  ->  here, only the lower 16 bits are stored, rest are truncated (as multiplication of two 16-bit numbers results in a 32-bit number )
             5'b00011 : result = (b != 0) ? (a / b) : {WIDTH{1'b0}};    // QUOTIENT    Note : WIDTH'd0 is not allowed, size must be a number, parameter is allowed in range : [WIDTH - 1 : 0], also allowed inside if : if (WIDTH > 4)
-            5'b00100 : result = (b != 0) ? (a % b) : {WIDTH{1'b0}};    // REMAINDER
+            5'b00100 : result = (b != 0) ? (a % b) : {WIDTH{1'b0}};    // REMAINDER   Note : DIV/MOD are modeled behaviorally, not intended for synthesis, because they infer very large combinational blocks
             
             // LOGICAL OPERATIONS
             5'b00101 : result = a & b;          // AND
@@ -47,12 +47,12 @@ module alu #(
             5'b01100 : result = -a;             // 2's complement negation
             
             // SHIFT OPERATIONS
-            5'b01101 : result = a << b[3:0];              // SLL  -> shift left logical
+            5'b01101 : result = a << b[3:0];              // SLL  -> shift left logical, b[3:0] represents the shift amount(0 t 15)
             5'b01110 : result = a >> b[3:0];              // SRL  -> shift right logical 
             5'b01111 : result = $signed(a) >>> b[3:0];    // SRA  -> shift right arithmetic : sign bit is preserved
             
             // COMPARISON OPERATIONS
-            5'b10000 : result = ($signed(a) < $signed(b)) ? {WIDTH{1'b0}} : {WIDTH{1'b0}};   // SLT  -> set less than
+            5'b10000 : result = ($signed(a) < $signed(b)) ? {WIDTH{1'b1}} : {WIDTH{1'b0}};   // SLT  -> set less than
             5'b10001 : result = (a < b) ? {WIDTH{1'b1}} : {WIDTH{1'b0}};                     // SLTU  -> set less than unsigned
             
             // INCREMENT/DECREMENT OPERATIONS
@@ -60,8 +60,8 @@ module alu #(
             5'b10011 : {carry_out, result} = a - 1;          // DEC
             
             // ROTATE OPERATIONS
-            5'b10100 : result = {a[WIDTH-2 : 0], a[WIDTH-1]};    // ROT L  -> gets rotated by a single bit
-            5'b10101 : result = {a[0], a[WIDTH-1 : 1]};    // ROT R  -> gets rotated by a single bit
+            5'b10100 : result = (b[3:0] == 0) ? a : (a << b[3:0]) | (a >> (WIDTH - b[3:0]));    // ROT L  -> gets rotated by given no of bits, b[3:0] represents the shift amount(0 to 15)
+            5'b10101 : result = (b[3:0] == 0) ? a : (a >> b[3:0]) | (a << (WIDTH - b[3:0]));    // ROT R  -> gets rotated by given no of bits, b == 0 results in a >> WIDTH : this can be a problem, because shifting exactly by WIDTH or more is undefined/tool dependent
             
             // PASS OPERATIONS
             5'b10110 : result = a;              // PASS a
